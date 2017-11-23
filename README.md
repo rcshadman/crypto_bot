@@ -4,12 +4,12 @@ Notification app that notify you by email when a crypto currency reach a certain
 
 ## Requirements
 
-Python 3.6.3
-Django 1.11.7
-Django Rest Framework 3.7.3
-Djoser 1.1.4
-Redis 2.10.6 
-Celery 4.1.0
+- Python 3.6.3
+- Django 1.11.7
+- Django Rest Framework 3.7.3
+- Djoser 1.1.4
+- Redis 2.10.6 
+- Celery 4.1.0
 
 Coinbase 2.0.6
 MysqlClient 1.3.12
