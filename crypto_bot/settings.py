@@ -61,6 +61,10 @@ INSTALLED_APPS = [
     # Custom APP
     # Create a custom user model to authentify by email
     'account.apps.AccountConfig',
+
+    # Custom APP
+    # Our main app that contains the alerts and bot
+    'main_app.apps.MainAppConfig',
 ]
 
 MIDDLEWARE = [
