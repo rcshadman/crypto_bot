@@ -15,21 +15,21 @@ class CoinbaseManager(object):
       currency_pair = '%s-%s' % (crypto_currency, exchange_currency)
       return currency_pair
 
-  def get_spot_price(self, crypto_currency="BTC", exchange_currency="USD"):
+  def get_spot_price(self, crypto_currency, exchange_currency):
       """Get the spot price from API"""
-      currency_pair = get_curreny_pair(crypto_currency, exchange_currency)
+      currency_pair = self.get_curreny_pair(crypto_currency, exchange_currency)
       price = self.client.get_spot_price(currency_pair = currency_pair)
-      return price
+      return price.amount
 
-  def get_buy_price(self, crypto_currency="BTC", exchange_currency="USD"):
+  def get_buy_price(self, crypto_currency, exchange_currency):
       """Get the buy price from API"""
-      currency_pair = get_curreny_pair(crypto_currency, exchange_currency)
+      currency_pair = self.get_curreny_pair(crypto_currency, exchange_currency)
       price = self.client.get_buy_price(currency_pair = currency_pair)
-      return price
+      return price.amount
 
-  def get_sell_price(self, crypto_currency="BTC", exchange_currency="USD"):
+  def get_sell_price(self, crypto_currency, exchange_currency):
       """Get the sell price from API"""
-      currency_pair = get_curreny_pair(crypto_currency, exchange_currency)
+      currency_pair = self.get_curreny_pair(crypto_currency, exchange_currency)
       price = self.client.get_sell_price(currency_pair = currency_pair)
-      return price
+      return price.amount
     

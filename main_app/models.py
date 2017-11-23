@@ -6,6 +6,12 @@ from django.utils import timezone
 class Alert(models.Model):
 
     # Set avaible choices of operators for the alert
+    # Didn't find a programatic way yet,
+    # so let's make it clear at least
+    # CAREFULL - I use the value in some string
+    # main_app.tasks.mail_taks
+    # main_app.tasks.aler_tasks
+    # .__str__
     ABOVE = 'above'
     UNDER = "under"
     OPERATOR_CHOICES = (
@@ -102,5 +108,5 @@ class Alert(models.Model):
     def trigger(self):
         self.done = True
         self.executed_at = timezone.now()
-        print("TRIGGERED")
+        print("%s triggered !" % (self.__str__))
         self.save()

@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOST')
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -42,10 +42,10 @@ INSTALLED_APPS = [
     # https://github.com/celery/django-celery-beat
     'django_celery_beat',
 
-    # Celery package to provide result backends
-    # with django ORM or cache framework
-    # https://github.com/celery/django-celery-results
-    # 'django_celery_results',
+    # # Celery package to provide result backends
+    # # with django ORM or cache framework
+    # # https://github.com/celery/django-celery-results
+    # # 'django_celery_results',
 
      # The rest framework
      # http://www.django-rest-framework.org/api-guide
@@ -189,3 +189,13 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
+
+
+# Mail configuration
+EMAIL_USE_TLS = True
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+

@@ -5,7 +5,6 @@ certifi==2017.11.5
 chardet==3.0.4
 coinbase==2.0.6
 Django==1.11.7
-django-celery-beat==1.1.0
 django-templated-mail==1.0.0
 djangorestframework==3.7.3
 djoser==1.1.4
