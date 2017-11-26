@@ -153,6 +153,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = 'static'
+
 # Configuration for Django rest framework
 # http://www.django-rest-framework.org/api-guide
 REST_FRAMEWORK = {
