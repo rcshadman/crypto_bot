@@ -17,7 +17,8 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 urlpatterns = [
-    # TODO - Include url to app REACT - FRONT
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include('main_app.urls')),
+    # Serve our app for frontend
+    url(r'^', include('frontend_app.urls')),
 ]

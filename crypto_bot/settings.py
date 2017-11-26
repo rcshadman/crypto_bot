@@ -163,6 +163,9 @@ USE_TZ = True
 # Indicate where lives our react app / app front end
 FRONTEND_DIR = os.path.join(BASE_DIR, 'frontend')
 
+# The index.html we want to serve
+FRONTEND_INDEX = os.path.join(FRONTEND_DIR, 'build', 'index.html')
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 

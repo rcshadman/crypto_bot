@@ -13,7 +13,7 @@ class FrontendAppView(View):
 
     def get(self, request):
         try:
-            with open(os.path.join(settings.FRONTEND_DIR, 'build', 'index.html')) as f:
+            with open(settings.FRONTEND_INDEX) as f:
                 return HttpResponse(f.read())
         except FileNotFoundError:
             logging.exception('Production build of app not found')
@@ -24,3 +24,4 @@ class FrontendAppView(View):
                 run `yarn run build` to test the production version.
                 """,
                 status=501,
+            )
