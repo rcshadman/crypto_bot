@@ -67,7 +67,7 @@ class AlertDetail(APIView):
 
     # authentify by token or session ( for the superuser )
     authentication_classes = (
-        authentication.TokenAuthentication,
+        JSONWebTokenAuthentication,
         authentication.SessionAuthentication
     )
     
@@ -78,7 +78,7 @@ class AlertDetail(APIView):
     def get_alert(self, user, pk):
         try:
             return Alert.objects.get(pk=pk, owner=user)
-        except Snippet.DoesNotExist:
+        except Alert.DoesNotExist:
             raise Http404
 
     def get(self, request, pk, format=None):
