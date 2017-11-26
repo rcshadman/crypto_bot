@@ -8,3 +8,9 @@ __pycache__/
 # Celery test / stuff
 celerybeat-schedule
 celerybeat.pid
+
+# Dependencies
+node_modules/
+
+# build_files
+static/
