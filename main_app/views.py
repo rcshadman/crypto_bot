@@ -1,4 +1,5 @@
 from rest_framework import status, permissions, authentication
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -17,7 +18,7 @@ class AlertList(APIView):
 
     # authentify by token or session ( for the superuser )
     authentication_classes = (
-        authentication.TokenAuthentication,
+        JSONWebTokenAuthentication,
         authentication.SessionAuthentication
     )
     

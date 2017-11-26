@@ -13,8 +13,8 @@ urlpatterns = [
     url(r'^alerts/$', views.AlertList.as_view()),
     url(r'^alerts/(?P<pk>[0-9]*)$', views.AlertDetail.as_view()),
 
-    # include authtoken url, create / destroy
-    url(r'^auth/', include('djoser.urls.authtoken')),
+    # include jwt url
+    url(r'^auth/', include('djoser.urls.jwt')),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
+# For token jwt expiration
+# see bottom file
+import datetime
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -191,7 +195,8 @@ REST_FRAMEWORK = {
     ),
 
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
@@ -204,6 +209,10 @@ REST_FRAMEWORK = {
 # Custom auth user model - auth by email instead of username
 # https://docs.djangoproject.com/en/1.11/topics/auth/customizing/
 AUTH_USER_MODEL = 'account.User'
+
+# Configuration for rest_framework_jwt token
+# http://getblimp.github.io/django-rest-framework-jwt/#additional-settings
+JWT_EXPIRATION_DELTA = datetime.timedelta(hours=2),
 
 
 # Cors settings to allow make request between the react app and the api
