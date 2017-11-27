@@ -10,9 +10,8 @@ Notification app that notify you by email when a crypto currency reach a certain
 - Djoser 1.1.4
 - Redis 2.10.6 
 - Celery 4.1.0
-
-Coinbase 2.0.6
-MysqlClient 1.3.12
+- Coinbase 2.0.6
+- MysqlClient 1.3.12
 
 ## Configuration
 
