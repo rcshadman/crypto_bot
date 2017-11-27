@@ -8,6 +8,7 @@ class User extends Component {
   constructor(props) {
       super(props)
 
+      // Some constants
       const STATUS = {
         EDIT: 'EDIT',
         READ: 'READ'
@@ -20,9 +21,12 @@ class User extends Component {
   }
 
   componentWillMount() {
-    const {dispatch} = this.props
+    const {dispatch, isFetching} = this.props
 
-    dispatch(getUser())
+    // Get the user data to show him
+    if (!isFetching){
+      dispatch(getUser())
+    }
   }
 
   render() {

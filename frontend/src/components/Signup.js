@@ -21,6 +21,7 @@ class Signup extends Component {
 
     e.preventDefault()
 
+    // Check both password are the same
     if (password.value.trim() == password_confirm.value.trim()){
       const creds = { 
         email: email.value.trim(),
@@ -50,11 +51,14 @@ class Signup extends Component {
 
     const { errorForm } = this.state
 
+    // If already authenticated show his alerts
     if (isAuthenticated) {
       return (
         <Redirect to='/alerts'/>
       )
     }
+
+    // If the account was created, redirect to the login page
     if (created) {
       return (
         <Redirect to='/'/>

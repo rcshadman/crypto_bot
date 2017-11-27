@@ -10,8 +10,10 @@ const reducers = getReducers()
 
 export default function configureStore() {
   return createStore(
+    // We add all our reduces in the store
     reducers,
     applyMiddleware(
+      // We add our custim middleware
       api,
       thunkMiddleware,
       loggerMiddleware,

@@ -5,12 +5,15 @@ export const API_URL = 'http://127.0.0.1:8000/api/'
 
 function callApi(endpoint, config={method: 'GET'}, authenticatedRequest) {
 
+  // We ask for json content from our api
   config.headers = Object.assign(config.headers || {}, {'Content-Type': `application/json`})
 
+  // Get the token if it exists
   let token = localStorage.getItem('cryptobot_authentication_token') || null
 
   if(authenticatedRequest) {
     if(token) {
+      // Add our token in the header if needed
       config.headers = Object.assign(config.headers, {'Authorization': `Jwt ${token}`})
     } else {
       throw new Error("No Jwt Token provided")
@@ -18,6 +21,7 @@ function callApi(endpoint, config={method: 'GET'}, authenticatedRequest) {
   }
 
   if (config.body){
+    // The api only accept json as for body 
     config.body = JSON.stringify(config.body)
   }
 

@@ -4,6 +4,7 @@ import { Redirect, withRouter } from 'react-router-dom'
 import {connect} from 'react-redux'
 
 // Check if the user is authenticated before rendering the component
+// if not redirect to login page
 class Auth extends Component {
   render() {
     const { isAuthenticated, Child } = this.props

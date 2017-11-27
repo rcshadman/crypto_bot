@@ -28,6 +28,7 @@ function logoutSuccess() {
   }
 }
 
+// TODO - Make a real logout, for now we just remove the item in localstorage
 export function logout() {
   return dispatch => {
     localStorage.removeItem('cryptobot_authentication_token');

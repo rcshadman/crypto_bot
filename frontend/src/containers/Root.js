@@ -20,6 +20,7 @@ const AuthRoute = ({ component: Component, ...rest }) => (
   )}/>
 )
 
+// A quick and simple 404
 const NoMatch = () => (
   <p>Sorry we couldn't find what you are looking for</p>
 )

@@ -30,6 +30,7 @@ export default function authReducer(state={
           isAuthenticated: false
         })
       case LOGIN_SUCCESS:
+        // TODO - Remove in a near future and adapt the middleware
         localStorage.setItem('cryptobot_authentication_token', action.response.token)
         return Object.assign({}, state, {
           isFetching: false,

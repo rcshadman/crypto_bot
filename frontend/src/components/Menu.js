@@ -11,6 +11,9 @@ class Menu extends Component {
   onClick(e) {
     const {dispatch, isAuthenticated, isFetching} = this.props
 
+    // Don't call if a request is already beging made
+    // Could change our data while we request.
+    // Avoid multiple times the same request
     if (!isFetching){
       dispatch(logout())
     }
@@ -23,6 +26,7 @@ class Menu extends Component {
     return (
       <div>
         {
+          /* Show the routes according if the user is authenticated or not */
           isAuthenticated ? 
           <div>
             <li><Link to="/alerts">My alerts</Link></li>

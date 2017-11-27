@@ -60,6 +60,7 @@ class CreateAlert extends Component {
       available_operator,
     } = this.state
 
+    // If the alert was created go the detail page of this last one
     if (created){
       return (
         <Redirect to={'/alerts/'+singleAlert.id}/>

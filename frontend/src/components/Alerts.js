@@ -10,9 +10,11 @@ import {getAllAlerts} from '../store/actions/alert'
 class Alerts extends Component {
 
   componentWillMount() {
-    const {dispatch} = this.props
+    const {dispatch, isFetching} = this.props
 
-    dispatch(getAllAlerts())
+    if (!isFetching){
+      dispatch(getAllAlerts())
+    }
   }
 
   render() {
@@ -51,7 +53,6 @@ class Alerts extends Component {
           }
           </tbody>
         </Table>
-        {!allAlerts && <div>Empty</div>}
         {errorMessage && <div>{errorMessage}</div>}
       </div>
     )

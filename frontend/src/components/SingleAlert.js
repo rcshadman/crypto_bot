@@ -9,6 +9,7 @@ class SingleAlert extends Component {
   constructor(props) {
       super(props)
 
+      // some CONSTS
       const STATUS = {
         EDIT: 'EDIT',
         READ: 'READ'
@@ -30,6 +31,7 @@ class SingleAlert extends Component {
       }
   }
 
+  // When the edit form is submited
   onSubmit(e) {
     const {dispatch, isFetching, match} = this.props
     const {operator, crypto, exchange, limit} = this.refs
@@ -50,31 +52,42 @@ class SingleAlert extends Component {
     return false
   }
 
+  // Goes in edit mode
   onClickEdit(e){
     const {available_status} = this.state
     this.setState({status: available_status.EDIT});
   }
 
+  // Goes in reading mode
   onClickRead(e){
     const {available_status} = this.state
     this.setState({status: available_status.READ});
   }
 
+  // Delete the alert
+  // NOTE : The actual middleware doesn't support empty responses
+  // the request work, but we don't receive a success on our side
+  // TODO - Add a dialog to ensure that this is what the user want
   onClickDelete(e){
-    const {dispatch, match} = this.props
-    dispatch(deleteAlert(match.params.id))
+    const {dispatch, match, isFetching} = this.props
+    if (!isFetching){
+      dispatch(deleteAlert(match.params.id))
+    }
   }
 
 
   componentWillMount() {
-    const {dispatch, match} = this.props
+    const {dispatch, match, isFetching} = this.props
 
-    dispatch(getSingleAlert(match.params.id))
+    if (!isFetching){
+      dispatch(getSingleAlert(match.params.id))
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
     const {singleAlert, saved} = this.props
     const {available_status} = this.state
+    // if a the alert has been modified go back to reading mode
     if (prevProps.singleAlert !== singleAlert && saved){
       this.setState({status: available_status.READ});
     }
@@ -90,6 +103,7 @@ class SingleAlert extends Component {
       available_operator,
     } = this.state
 
+    // If the actual alert has been deleted go back to main page
     if (deleted){
       return (
         <Redirect to='/alerts'/>
@@ -107,6 +121,7 @@ class SingleAlert extends Component {
     return (
       <div>
         {
+          /* Switch between reeding and editing mode */
           status === available_status.READ ?
           <div>
             <p>Crypto currency : {crypto_currency}</p>
@@ -174,6 +189,7 @@ class SingleAlert extends Component {
 
         <div>
           {
+            /* Switch between reeding and editing mode */
             status === available_status.READ ?
             <button onClick={(e) => {this.onClickEdit(e)}}>Edit</button>
             :
