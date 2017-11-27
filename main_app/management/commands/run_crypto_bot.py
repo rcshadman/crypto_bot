@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django_celery_beat.models import PeriodicTask, IntervalSchedule
 import json
 from main_app.tasks import check_spot_price
-from crypto_bot.celery import app, test
+from crypto_bot.celery import app
 
 class Command(BaseCommand):
     help = 'Start celery worker beat to check price every 5 seconds'
