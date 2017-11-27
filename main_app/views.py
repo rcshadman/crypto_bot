@@ -1,4 +1,5 @@
 from rest_framework import status, permissions, authentication
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -17,7 +18,7 @@ class AlertList(APIView):
 
     # authentify by token or session ( for the superuser )
     authentication_classes = (
-        authentication.TokenAuthentication,
+        JSONWebTokenAuthentication,
         authentication.SessionAuthentication
     )
     
@@ -66,7 +67,7 @@ class AlertDetail(APIView):
 
     # authentify by token or session ( for the superuser )
     authentication_classes = (
-        authentication.TokenAuthentication,
+        JSONWebTokenAuthentication,
         authentication.SessionAuthentication
     )
     
@@ -77,7 +78,7 @@ class AlertDetail(APIView):
     def get_alert(self, user, pk):
         try:
             return Alert.objects.get(pk=pk, owner=user)
-        except Snippet.DoesNotExist:
+        except Alert.DoesNotExist:
             raise Http404
 
     def get(self, request, pk, format=None):

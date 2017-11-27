@@ -72,6 +72,18 @@ celery -A crypto_bot beat -l info
 redis-server
 ```
 
+## For production 
+Checkout the frontend folder and run
+```
+npm run build / yarn build
+```
+then from the root project :
+```
+./manage.py collectstatic
+```
+
+
+
 ## Improvements - AKA TODO
 
 ### The bot - schedule task

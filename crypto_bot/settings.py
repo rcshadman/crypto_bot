@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
+# For token jwt expiration
+# see bottom file
+import datetime
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -37,6 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Needed to make request bewteen our react app and django
+    # https://github.com/OttoYiu/django-cors-headers
+    'corsheaders',
 
     # Celery package to do periodic tasks
     # https://github.com/celery/django-celery-beat
@@ -65,11 +73,18 @@ INSTALLED_APPS = [
     # Custom APP
     # Our main app that contains the alerts and bot
     'main_app.apps.MainAppConfig',
+
+    # Custom APP
+    # Serve our react app on frontend
+    'frontend_app.apps.FrontendAppConfig',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # Middleware for cors header, enable us to communicate with the react app
+    # https://github.com/OttoYiu/django-cors-headers
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -82,8 +97,8 @@ ROOT_URLCONF = 'crypto_bot.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
         'APP_DIRS': True,
+        'DIRS': [],
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -148,10 +163,25 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Custom react config
+# Indicate where lives our react app / app front end
+FRONTEND_DIR = os.path.join(BASE_DIR, 'frontend')
+
+# The index.html we want to serve
+FRONTEND_INDEX = os.path.join(FRONTEND_DIR, 'build', 'index.html')
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = 'static'
+
+
+STATICFILES_DIRS = [
+    os.path.join(FRONTEND_DIR, 'build', 'static'),
+]
+
 
 # Configuration for Django rest framework
 # http://www.django-rest-framework.org/api-guide
@@ -165,7 +195,8 @@ REST_FRAMEWORK = {
     ),
 
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
@@ -179,7 +210,14 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/1.11/topics/auth/customizing/
 AUTH_USER_MODEL = 'account.User'
 
+# Configuration for rest_framework_jwt token
+# http://getblimp.github.io/django-rest-framework-jwt/#additional-settings
+JWT_EXPIRATION_DELTA = datetime.timedelta(hours=2),
 
+
+# Cors settings to allow make request between the react app and the api
+# CAREFULL - Modify this value for production
+CORS_ORIGIN_ALLOW_ALL = True     
 
 # Celery setting
 # http://docs.celeryproject.org/en/latest/django/
